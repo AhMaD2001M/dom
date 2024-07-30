@@ -27,10 +27,16 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            const user = users.find(user => user.email === email && user.password === password);
+            let userFound = false;
+            for (let i = 0; i < users.length; i++) {
+                if (users[i].email === email && users[i].password === password) {
+                    loggedInUser = users[i];
+                    userFound = true;
+                    break;
+                }
+            }
 
-            if (user) {
-                loggedInUser = user;
+            if (userFound) {
                 window.location.href = 'home.html';
             } else {
                 alert('Invalid email or password');
