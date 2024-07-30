@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'index.html';
         });
     }
-
+console.log(signupForm)
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     break;
                 }
             }
-
+            console.log(loginForm)
             if (userFound) {
                 window.location.href = 'home.html';
             } else {
