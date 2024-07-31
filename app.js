@@ -1,11 +1,11 @@
-let users = [];
+let users = JSON.parse(localStorage.getItem('users')) || [];
 
 document.addEventListener('DOMContentLoaded', () => {
     const signupForm = document.getElementById('signup-form');
     const loginForm = document.getElementById('login-form');
     const userNameDisplay = document.getElementById('user-name');
     const logoutButton = document.getElementById('logout');
-    let loggedInUser = null;
+    let loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
     if (signupForm) {
         signupForm.addEventListener('submit', (e) => {
@@ -16,11 +16,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const user = { name, email, password };
             users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
             alert('Account created successfully!');
             window.location.href = 'index.html';
         });
     }
-console.log(signupForm)
+
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -32,10 +33,10 @@ console.log(signupForm)
                 if (users[i].email === email && users[i].password === password) {
                     loggedInUser = users[i];
                     userFound = true;
+                    localStorage.setItem('loggedInUser', JSON.stringify(loggedInUser));
                     break;
                 }
             }
-            console.log(loginForm)
             if (userFound) {
                 window.location.href = 'home.html';
             } else {
@@ -54,7 +55,7 @@ console.log(signupForm)
 
     if (logoutButton) {
         logoutButton.addEventListener('click', () => {
-            loggedInUser = null;
+            localStorage.removeItem('loggedInUser');
             window.location.href = 'index.html';
         });
     }
